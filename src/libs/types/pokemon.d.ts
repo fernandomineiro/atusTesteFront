@@ -12,6 +12,8 @@ export interface IPokemon {
   sprite?: string;
   description: string;
   points?: number;
+  weight?: number;
+  height?: number;
 }
 
 export interface IPokeSummary {

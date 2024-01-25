@@ -10,6 +10,8 @@ interface IPokeCard extends HTMLAttributes<HTMLDivElement> {
   image?: string;
   sprite?: string;
   points?: any;
+  weight?: number;
+  height?: number;
 }
 
 const getStyle = ({ nickname }: IPokeCard) => {
@@ -38,7 +40,7 @@ const getStyle = ({ nickname }: IPokeCard) => {
 
 const PixelatedPokemonCard = styled("div")((props: IPokeCard) => getStyle(props));
 
-const PokeCard: React.FC<IPokeCard> = ({ name, nickname, image, sprite, points }) => {
+const PokeCard: React.FC<IPokeCard> = ({ name, nickname, image, sprite, points, weight, height }) => {
   return (
     <PixelatedPokemonCard nickname={nickname} className="pxl-border">
       {nickname && (
@@ -49,7 +51,9 @@ const PokeCard: React.FC<IPokeCard> = ({ name, nickname, image, sprite, points }
           </Text>
         </>
       )}
-      <Text>pontos: {points}</Text>
+      <Text>Altura: {height}</Text>
+      <Text>Peso: {weight}</Text>
+      <Text>Pontos: {points}</Text>
       {name}
     </PixelatedPokemonCard>
   );

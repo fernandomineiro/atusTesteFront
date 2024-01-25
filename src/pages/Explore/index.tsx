@@ -2,7 +2,7 @@ import React, { useState, createRef, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-import { Text, Button, Loading, Navbar, PokeCard, Modal } from "../../components";
+import { Text, Button, Loading, Navbar, PokeCard } from "../../components";
 import { IPokemon, IAllPokemonResponse } from "../../libs/types/pokemon";
 import { useGlobalContext } from "../../libs/context";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -63,7 +63,7 @@ const Explore: React.FC = () => {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
+
       [pokemons[currentIndex], pokemons[randomIndex]] = [
         pokemons[randomIndex], pokemons[currentIndex]];
     }
@@ -97,7 +97,10 @@ const Explore: React.FC = () => {
         data.results?.map(async (result:any) => {
           const { data } = await axios.get<any>(`https://pokeapi.co/api/v2/pokemon/${result.name}`);
 
+
           const mapped =  {name: data.name,
+          height: data.height, 
+          weight: data.weight,
           image: data.sprites.back_default,
           description: `Pokemon com experiencia de ${data.base_experience}`,
           points: Math.floor(10* Math.random() + 1), 
@@ -110,7 +113,7 @@ const Explore: React.FC = () => {
 
         answerNumber <= 8 ? setNumberStart(answerNumber):  alert('Só pode ter até 8 cartas')
 
-        console.log(pokemons)
+
 
 
       } catch (error) {
@@ -142,7 +145,7 @@ const Explore: React.FC = () => {
                   key={`${pokemon.name}-${Math.random()}`}
                  
                   style={{ display: "flex" }}>
-                  <PokeCard nickname={pokemon.name} name={pokemon.description} image={pokemon.image} points={pokemon.points}/>
+                  <PokeCard nickname={pokemon.name} height={pokemon.height}  weight={pokemon.weight}  name={pokemon.description} image={pokemon.image} points={pokemon.points}/>
                 </Text> 
           </>
               ))
